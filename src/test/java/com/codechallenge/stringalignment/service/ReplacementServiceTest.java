@@ -16,7 +16,7 @@ class ReplacementServiceTest {
             "<p>Original</p>, Replaced, <p>Replaced</p>",
             "I don’t understand<b>this</b>, I do not understand this., I do not understand<b>this.</b>",
             "This is a tyypo., This is a typo., This is a typo.",
-            "<p>Hello<b>world</b>!</p>, Hello world!, <p>Hello<b>world</b>!</p>",
+            "<p>Hello<b>world</b>!</p>, Hello world!, <p>Hello<b>world!</b></p>",
     })
     void getHtmlReplacement(String givenHtmlInput, String givenReplacement, String expectedHtml) {
 
