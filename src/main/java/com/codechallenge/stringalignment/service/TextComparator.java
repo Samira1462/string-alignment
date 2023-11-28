@@ -2,6 +2,7 @@ package com.codechallenge.stringalignment.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static com.codechallenge.stringalignment.utils.StringUtils.*;
 
@@ -13,57 +14,58 @@ public final class TextComparator {
     public static TextComparator createTextComparator() {
         return new TextComparator();
     }
-    public List<String> compareAndFilter(List<String> originalList, List<String> modifiedList) {
+
+    public List<String> compare(List<String> parsedHtmlInputList, List<String> parsedReplacementList) {
         List<String> result = new ArrayList<>();
         int modifiedIndex = 0;
 
-        for (String originalWord : originalList) {
+        for (String originalWord : parsedHtmlInputList) {
             if (isHtmlTag(originalWord)) {
                 result.add(originalWord);
             } else {
-                modifiedIndex = addMissingWordsFromModifiedList(
+                modifiedIndex = addMissingWordsFromReplacementList(
                         result,
-                        originalList,
-                        modifiedList,
+                        parsedHtmlInputList,
+                        parsedReplacementList,
                         modifiedIndex
                 );
                 modifiedIndex = replaceWordIfNecessary(
                         result,
                         originalWord,
-                        modifiedList,
+                        parsedReplacementList,
                         modifiedIndex
                 );
             }
         }
 
-        addRemainingWords(result, modifiedList, modifiedIndex);
+        addRemainingWordsInReplacementList(result, parsedReplacementList, modifiedIndex);
         return result;
     }
 
-    private int addMissingWordsFromModifiedList(
+    private int addMissingWordsFromReplacementList(
             List<String> result,
-            List<String> originalList,
-            List<String> modifiedList,
+            List<String> parsedHtmlInputList,
+            List<String> parsedReplacementList,
             int startIndex
     ) {
-        while (startIndex < modifiedList.size() && !firstContainsWord(originalList, modifiedList.get(startIndex))) {
-            result.add(modifiedList.get(startIndex));
+        while (startIndex < parsedReplacementList.size() && !firstContainsWord(parsedHtmlInputList, parsedReplacementList.get(startIndex))) {
+            result.add(parsedReplacementList.get(startIndex));
             startIndex++;
         }
         return startIndex;
     }
 
-    private int replaceWordIfNecessary(List<String> result, String originalWord, List<String> modifiedList, int startIndex) {
-        if (startIndex < modifiedList.size() && equalsIgnoreCaseStripPunctuation(originalWord, modifiedList.get(startIndex))) {
-            result.add(endsWithPunctuation(modifiedList.get(startIndex)) ? modifiedList.get(startIndex) : originalWord);
+    private int replaceWordIfNecessary(List<String> result, String originalWord, List<String> parsedReplacementList, int startIndex) {
+        if (startIndex < parsedReplacementList.size() && equalsIgnoreCaseStripPunctuation(originalWord, parsedReplacementList.get(startIndex))) {
+            result.add(endsWithPunctuation(parsedReplacementList.get(startIndex)) ? parsedReplacementList.get(startIndex) : originalWord);
             startIndex++;
         }
         return startIndex;
     }
 
-    private void addRemainingWords(List<String> result, List<String> modifiedList, int startIndex) {
-        for (int i = startIndex; i < modifiedList.size(); i++) {
-            result.add(modifiedList.get(i));
-        }
+    private void addRemainingWordsInReplacementList(List<String> result, List<String> parsedReplacementList, int startIndex) {
+        result.addAll(IntStream.range(startIndex, parsedReplacementList.size())
+                .mapToObj(parsedReplacementList::get)
+                .toList());
     }
 }

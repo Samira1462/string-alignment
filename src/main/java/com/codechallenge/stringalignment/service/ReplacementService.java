@@ -22,7 +22,7 @@ public class ReplacementService {
         List<String> parsedHtmlInput = parser.apply(htmlInput, StringNormalizer.getInstance());
         List<String> parsedReplacement = parser.apply(replacement, StringNormalizer.getInstance());
 
-        List<String> list = textComparator.compareAndFilter(
+        List<String> list = textComparator.compare(
                 parsedHtmlInput,
                 parsedReplacement
         );

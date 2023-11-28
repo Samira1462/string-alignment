@@ -27,7 +27,7 @@ class TextComparatorTest {
         List<String> modifiedList = Arrays.asList(modifiedCsv.split(" "));
         List<String> expected = Arrays.asList(expectedCsv.split(" "));
 
-        List<String> result = comparator.compareAndFilter(originalList, modifiedList);
+        List<String> result = comparator.compare(originalList, modifiedList);
 
         assertEquals(expected, result);
     }
