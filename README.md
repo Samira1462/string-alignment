@@ -5,7 +5,7 @@
 This project is designed to showcase the implementation of a Java method that re-inserts HTML tags
 into a string at suitable positions. The task involves creating a method that takes two input
 strings and outputs a string with HTML elements from the first input string inserted into the
-second input string at appropriate positions.
+second input string at appropriate positions. [String_Alignment_Coding_Task.pdf](doc/String_Alignment_Coding_Task.pdf)
 
 ## Thought Process
 
