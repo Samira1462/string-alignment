@@ -19,7 +19,7 @@ explaining and elaborating how solved this challenge, thought process, assumptio
 1. Clone this repository to your local machine using Git.`git clone https://github.com/Samira1462/string-alignment.git`
 2. Navigate to the project directory.
 3. Run `mvn clean install` to build the project and run all tests.
-4. Execute `mvn exec:java -Dexec.mainClass="com.codechallenge.htmlreplacment.Main" -Dexec.args="'<p>This very <i>loooong</i> text, which includes a <b>lot</b> of useless information, is not easy to understand.</p>' 'This long text includes a lot of information. It is not easy to understand.'"`
+4. Execute `mvn exec:java -Dexec.mainClass="com.codechallenge.htmlreplacment.Main" -Dexec.args="'<p>This very <i>loooooong</i> text, which includes a <b>lot</b> of useless information, is not easy to understand.</p>' 'This long text includes a lot of information. It is not easy to understand.'"`
 
 
 ## Testing
